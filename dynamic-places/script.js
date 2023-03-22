@@ -55,6 +55,13 @@ function loadPlaces(position) {
                     lng: 72.66073728561422, // add here longitude if using static data
                 }
             },
+            {
+                name: "Preksha School",
+                location: {
+                    lat: 23.056691539322877,  // add here latitude if using static data
+                    lng: 72.66369573081842, // add here longitude if using static data
+                }
+            },
         ];
 
         return Promise.resolve(HOME_PlACES);
@@ -95,6 +102,26 @@ function loadPlaces(position) {
 window.onload = () => {
     const scene = document.querySelector('a-scene');
 
+    function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+        let R = 6371; // Radius of the earth in km
+        let dLat = deg2rad(lat2-lat1);  // deg2rad below
+        let dLon = deg2rad(lon2-lon1); 
+        let a = 
+          Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2)
+          ; 
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        let d = R * c; 
+        // return d; // Distance in km
+        return d*1000; // Distance in m
+      }
+      
+      function deg2rad(deg) {
+        return deg * (Math.PI/180)
+      }
+    
+
     // first get current user location
     return navigator.geolocation.getCurrentPosition(function (position) {
 
@@ -108,7 +135,8 @@ window.onload = () => {
                     // add place name
                     const placeText = document.createElement('a-link');
                     placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-                    placeText.setAttribute('title', place.name);
+                    // placeText.setAttribute('title', place.name);
+                    placeText.setAttribute('title', getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " m");
                     placeText.setAttribute('scale', '15 15 15');
                     
                     placeText.addEventListener('loaded', () => {
