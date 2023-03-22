@@ -43,32 +43,33 @@ function loadPlaces(position) {
             },
         ];
         const HOME_PlACES = [
-            {
+           [ {
                 name: "FireStation",
                 url:"./assets/location-icon-png-4231.png",
                 location: {
                     lat: 23.0560196454931,  // add here latitude if using static data
                     lng: 72.66744606670677, // add here longitude if using static data
                 }
-            },
-            {
+            }],
+           [ {
                 name: "Divit Hills",
                 url:"./assets/location-icon-png-4231.png",
                 location: {
                     lat: 23.05760351001347,   // add here latitude if using static data
                     lng: 72.66268710592351, // add here longitude if using static data
                 }
-            },
-            {
+            }],
+           [ {
                 name: "Shiv Residency",
                 url:"./assets/location-icon-png-4231.png",
                 location: {
                     lat: 23.057774877427374,  // add here latitude if using static data
                     lng: 72.66073728561422, // add here longitude if using static data
                 }
-            },
+            }],
         ];
-
+        // console.log(HOME_PlACES)
+        // console.log(HOME_PlACES[0]);
         return Promise.resolve(HOME_PlACES[placeToFind]);
     } else {
         const params = {
