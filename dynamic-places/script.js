@@ -1,4 +1,9 @@
-// getting places from APIs
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const placeToFind = urlParams.get('v1');
+// console.log(v)
+// getting places from APIs or static places
 function loadPlaces(position) {
     const method = 'static';
     // const method = 'api';
@@ -64,7 +69,7 @@ function loadPlaces(position) {
             },
         ];
 
-        return Promise.resolve(HOME_PlACES);
+        return Promise.resolve(HOME_PlACES[placeToFind]);
     } else {
         const params = {
             radius: 300,    // search places not farther than this value (in meters)

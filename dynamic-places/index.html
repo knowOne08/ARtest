@@ -1,73 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
     <script src="./node_modules/html5-qrcode/html5-qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js" integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"
+      integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <title>Qr Scanner</title>
-</head>
-<body>
+  </head>
+  <body class="bg-black">
     <style>
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #reader {
-            width: 600px;
-        }
-        #result {
-            text-align: center;
-            font-size: 1.5rem;
-        }
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #reader {
+        width: 600px;
+      }
+      #result {
+        text-align: center;
+        font-size: 1.5rem;
+      }
     </style>
-    
+
     <main>
-        <div id="reader"></div>
-        <div id="result"></div>
-        
-    </main>   
+      <div id="reader"></div>
+      <div id="result"></div>
+    </main>
     <script>
-        const scanner = new Html5QrcodeScanner('reader', { 
-    // Scanner will be initialized in DOM inside element with id of 'reader'
-    qrbox: {
-        width: 250,
-        height: 250,
-    },  // Sets dimensions of scanning box (set relative to reader element width)
-    fps: 20, // Frames per second to attempt a scan
-});
+      const scanner = new Html5QrcodeScanner("reader", {
+        // Scanner will be initialized in DOM inside element with id of 'reader'
+        qrbox: {
+          width: 250,
+          height: 250,
+        }, // Sets dimensions of scanning box (set relative to reader element width)
+        fps: 20, // Frames per second to attempt a scan
+      });
 
+      scanner.render(success, error);
+      // Starts scanner
 
-scanner.render(success, error);
-// Starts scanner
+      function success(result) {
+        document.getElementById("result").innerHTML = `
+    <div class="flex flex-col space-y-4 justify-center h-screen">
+        <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onclick="location.href='./places.html?v1=0'">
+            Fire Station
+        </button>
+        <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onclick="location.href='./places.html?v1=1'">
+            Divit Hills
+        </button>
+        <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onclick="location.href='./places.html?v1=2'">
+            Shiv Residency
+        </button>
+    <div>
+    `;
+        // Prints result as a link inside result element
 
-function success(result) {
+        scanner.clear();
+        // Clears scanning instance
 
-    // document.getElementById('result').innerHTML = `
-    // <h2>Success!</h2>
-    // <p><a href="${result}">${result}</a></p>
-    // `;
+        document.getElementById("reader").remove();
+        // Removes reader element from DOM since no longer needed
+      }
 
-    document.getElementById('result').innerHTML = `
-        <h2>Success!</h2>
-        <p><a href="${result}">${result}</a></p>`
-    // Prints result as a link inside result element
-
-    scanner.clear();
-    // Clears scanning instance
-
-    document.getElementById('reader').remove();
-    // Removes reader element from DOM since no longer needed
-
-}
-
-function error(err) {
-    console.error(err);
-    // Prints any errors to the console
-}
-
-    </script> 
-</body>
+      function error(err) {
+        console.error(err);
+        // Prints any errors to the console
+      }
+    </script>
+  </body>
 </html>
