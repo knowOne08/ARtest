@@ -3,7 +3,7 @@ function loadPlaces(position) {
     const method = 'static';
     // const method = 'api';
     if(method === 'static') {
-        return [
+        const CLG_PlACES = [
             {
                 name: "LIBRARY",
                 location: {
@@ -33,6 +33,31 @@ function loadPlaces(position) {
                 }
             },
         ];
+        const HOME_PlACES = [
+            {
+                name: "FireStation",
+                location: {
+                    lat: 23.0560196454931,  // add here latitude if using static data
+                    lng: 72.66744606670677, // add here longitude if using static data
+                }
+            },
+            {
+                name: "Divit Hills",
+                location: {
+                    lat: 23.05760351001347,   // add here latitude if using static data
+                    lng: 72.66268710592351, // add here longitude if using static data
+                }
+            },
+            {
+                name: "Shiv Residency",
+                location: {
+                    lat: 23.057774877427374,  // add here latitude if using static data
+                    lng: 72.66073728561422, // add here longitude if using static data
+                }
+            },
+        ];
+
+        return Promise.resolve(HOME_PlACES);
     } else {
         const params = {
             radius: 300,    // search places not farther than this value (in meters)
