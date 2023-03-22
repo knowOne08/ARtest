@@ -55,13 +55,6 @@ function loadPlaces(position) {
                     lng: 72.66073728561422, // add here longitude if using static data
                 }
             },
-            {
-                name: "Preksha School",
-                location: {
-                    lat: 23.056691539322877,  // add here latitude if using static data
-                    lng: 72.66369573081842, // add here longitude if using static data
-                }
-            },
         ];
 
         return Promise.resolve(HOME_PlACES);
@@ -114,7 +107,7 @@ window.onload = () => {
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         let d = R * c; 
         // return d; // Distance in km
-        return d*1000; // Distance in m
+        return Math.round(d*1000); // Distance in m
       }
       
       function deg2rad(deg) {
@@ -136,7 +129,7 @@ window.onload = () => {
                     const placeText = document.createElement('a-link');
                     placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
                     // placeText.setAttribute('title', place.name);
-                    placeText.setAttribute('title', getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " m");
+                    placeText.setAttribute('title',  place.name + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
                     placeText.setAttribute('scale', '15 15 15');
                     
                     placeText.addEventListener('loaded', () => {
