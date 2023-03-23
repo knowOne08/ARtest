@@ -11,7 +11,7 @@ function loadPlaces(position) {
         const CLG_PlACES = [
             {
                 name: "LIBRARY",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.108156404203143, // add here latitude if using static data
                     lng: 72.59498734978379, // add here longitude if using static data
@@ -19,7 +19,7 @@ function loadPlaces(position) {
             },
             {
                 name: "A-block",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.1064422997269,  // add here latitude if using static data
                     lng: 72.59575386356772, // add here longitude if using static data
@@ -27,7 +27,7 @@ function loadPlaces(position) {
             },
             {
                 name: "M-Block",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.10796558905296, // add here latitude if using static data
                     lng:  72.59461530062512, // add here longitude if using static data
@@ -35,7 +35,7 @@ function loadPlaces(position) {
             },
             {
                 name: "GTU",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.105923398933385,  // add here latitude if using static data
                     lng: 72.59414710034639, // add here longitude if using static data
@@ -45,7 +45,7 @@ function loadPlaces(position) {
         const HOME_PlACES = [
            [ {
                 name: "FireStation",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.0560196454931,  // add here latitude if using static data
                     lng: 72.66744606670677, // add here longitude if using static data
@@ -53,7 +53,7 @@ function loadPlaces(position) {
             }],
            [ {
                 name: "Divit Hills",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.05760351001347,   // add here latitude if using static data
                     lng: 72.66268710592351, // add here longitude if using static data
@@ -61,7 +61,7 @@ function loadPlaces(position) {
             }],
            [ {
                 name: "Shiv Residency",
-                url:"./assets/location-icon-png-4231.png",
+                url:"./assets/arrow.gltf",
                 location: {
                     lat: 23.057774877427374,  // add here latitude if using static data
                     lng: 72.66073728561422, // add here longitude if using static data
@@ -139,11 +139,12 @@ window.onload = () => {
                     const longitude = place.location.lng;
 
                     // add place name
-                    const placeText = document.createElement('a-link');
+                    // const placeText = document.createElement('a-link');
+                    const placeText = document.createElement('a-entity');
                     placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
                     placeText.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
                     placeText.setAttribute('scale', '15 15 15');
-                    // placeText.setAttribute('src', place.url);
+                    placeText.setAttribute('src', place.url);
                     placeText.addEventListener('loaded', () => {
                         window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
                     });
