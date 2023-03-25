@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
-    <script src="app.js"></script>
-  </head>
-  <body>
-    <a-scene gps-camera>
-      <a-assets>
-        <a-asset-item id="marker" src="https://cdn.glitch.com/17d90997-eab1-4e61-9c58-2888eb46be6f%2Fmarker.patt"></a-asset-item>
-      </a-assets>
-      <a-marker preset="custom" type="pattern" url="#marker" id="destination">
-        <a-box position="0 1.6 -2" color="red"></a-box>
-        <a-text position="0 0.5 -2" value="Destination"></a-text>
-      </a-marker>
-    </a-scene>
-  </body>
+<head>
+<title>AR.js A-Frame Location-based</title>
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
+<script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
+</head>
+<body>
+<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+    <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+    <a-entity material='color: red' geometry='primitive: box' gps-new-entity-place="latitude: 23.056131809377412; longitude: 72.66743642496336" scale="10 10 10"></a-entity>
+</a-scene>
+</body>
 </html>
