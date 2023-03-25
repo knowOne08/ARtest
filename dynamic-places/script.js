@@ -152,7 +152,7 @@ window.onload = () => {
                     // const placeText = document.createElement('a-link');
                     const placeText = document.createElement('a-entity');
                     placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-                    // placeText.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
+                    placeText.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
                     // placeText.setAttribute('text',  "value: " + place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
                     placeText.setAttribute('scale', '15 15 15');
                     // placeText.setAttribute('src', place.url);
