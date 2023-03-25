@@ -158,7 +158,7 @@ window.onload = () => {
                     // placeText.setAttribute('src', place.url);
                     placeText.setAttribute('gltf-model', place.url);
                     // placeText.setAttribute('position', "1 0 0");
-                    placeText.setAttribute('text',"value: Click Me; color: #FF0000; align: center; anchor: center; baseline: bottom; letter-spacing: 5; line-height: 1.5; opacity: 0.8;")
+                    // placeText.setAttribute('text',"value: Click Me; color: #FF0000; align: center; anchor: center; baseline: bottom; letter-spacing: 5; line-height: 1.5; opacity: 0.8;")
                     placeText.addEventListener('loaded', () => {
                         window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
                     });
