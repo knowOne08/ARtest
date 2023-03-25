@@ -106,6 +106,7 @@ function loadPlaces(position) {
 
 
 window.onload = () => {
+    // const scene = document.querySelector('a-scene');
     const scene = document.querySelector('a-scene');
 
     function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -140,52 +141,53 @@ window.onload = () => {
 
 
         //ORIGINAl CODE
-        // // than use it to load from remote APIs some places nearby
-        // loadPlaces(position.coords)
-        //     .then((places) => {
-        //         places.forEach((place) => {
-        //             const latitude = place.location.lat;
-        //             const longitude = place.location.lng;
-
-        //             // add place name
-        //             // const placeText = document.createElement('a-link');
-        //             const placeText = document.createElement('a-entity');
-        //             placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-        //             // placeText.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
-        //             placeText.setAttribute('text',  "value: " + place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
-        //             placeText.setAttribute('scale', '15 15 15');
-        //             // placeText.setAttribute('src', place.url);
-        //             placeText.setAttribute('gltf-model', place.url);
-        //             // placeText.setAttribute('position', "1 0 0");
-        //             placeText.addEventListener('loaded', () => {
-        //                 window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-        //             });
-
-        //             scene.appendChild(placeText);
-        //         });
-        //     })
-        // },
-
-
-        //TESTING CODE
+        // than use it to load from remote APIs some places nearby
         loadPlaces(position.coords)
             .then((places) => {
                 places.forEach((place) => {
-                const latitude = place.location.lat;
-                const longitude = place.location.lng;
+                    const latitude = place.location.lat;
+                    const longitude = place.location.lng;
 
-                let arrow = document.getElementById('entity');
-                arrow.setAttribute("position", "0 0 -" + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude));
-                arrow.setAttribute("rotation", "0 " + heading(position.coords.latitude,position.coords.longitude,latitude,longitude) + " 0");
-                
-                arrow.addEventListener('loaded', () => {
-                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                    // add place name
+                    // const placeText = document.createElement('a-link');
+                    const placeText = document.createElement('a-entity');
+                    placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+                    // placeText.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
+                    // placeText.setAttribute('text',  "value: " + place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) +  " m");
+                    placeText.setAttribute('scale', '15 15 15');
+                    // placeText.setAttribute('src', place.url);
+                    placeText.setAttribute('gltf-model', place.url);
+                    // placeText.setAttribute('position', "1 0 0");
+                    placeText.setAttribute('text',"value: Click Me; color: #FF0000; align: center; anchor: center; baseline: bottom; letter-spacing: 5; line-height: 1.5; opacity: 0.8;")
+                    placeText.addEventListener('loaded', () => {
+                        window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                    });
+
+                    scene.appendChild(placeText);
                 });
-                scene.appendChild(placeText);
-            });
-        })
-        // console.log(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude))
-    },
+            })
+        },
+
+
+        //TESTING CODE
+    //     loadPlaces(position.coords)
+    //         .then((places) => {
+    //             places.forEach((place) => {
+    //             const latitude = place.location.lat;
+    //             const longitude = place.location.lng;
+
+    //             let arrow = document.getElementById('entity');
+    //             arrow.setAttribute("position", "0 0 -" + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude));
+    //             arrow.setAttribute("rotation", "0 " + heading(position.coords.latitude,position.coords.longitude,latitude,longitude) + " 0");
+                
+    //             arrow.addEventListener('loaded', () => {
+    //                 window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+    //             });
+    //             scene.appendChild(arrow);
+    //         });
+    //     })
+    //     // console.log(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude))
+    // },
     
     (err) => console.error('Error in retrieving position', err),
         {
