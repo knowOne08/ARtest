@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Indoor Navigation with AR.js</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-route-component/dist/aframe-route-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
+    <script src="app.js"></script>
   </head>
   <body>
-    <a-scene embedded arjs='debugUIEnabled: false;'>
-      <a-marker preset="custom" type="pattern" url="./assets/start.patt">
-        <a-entity position="0 0 0" id="start"></a-entity>
-      </a-marker>
-      <a-marker preset="custom" type="pattern" url="./assets/end.patt">
-        <a-entity position="0 0 0" id="end"></a-entity>
-      </a-marker>
-      <a-entity camera gps-camera rotation-reader></a-entity>
-      <a-entity route="start: #start; end: #end;"></a-entity>
+    <a-scene gps-camera>
+      <a-entity id="destination" location-based="latitude: 23.056130741323194; longitude: 72.66744803271337;">
+        <a-box position="0 1.6 -2" color="red"></a-box>
+        <a-text position="0 0.5 -2" value="Destination"></a-text>
+      </a-entity>
     </a-scene>
   </body>
 </html>
