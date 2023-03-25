@@ -7,10 +7,13 @@
   </head>
   <body>
     <a-scene gps-camera>
-      <a-entity id="destination" location-based="latitude: 23.056130741323194; longitude: 72.66744803271337;">
+      <a-assets>
+        <a-asset-item id="marker" src="https://cdn.glitch.com/17d90997-eab1-4e61-9c58-2888eb46be6f%2Fmarker.patt"></a-asset-item>
+      </a-assets>
+      <a-marker preset="custom" type="pattern" url="#marker" id="destination">
         <a-box position="0 1.6 -2" color="red"></a-box>
         <a-text position="0 0.5 -2" value="Destination"></a-text>
-      </a-entity>
+      </a-marker>
     </a-scene>
   </body>
 </html>
