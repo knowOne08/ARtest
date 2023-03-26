@@ -114,17 +114,28 @@ window.onload = () => {
                     });
                     // entity.setAttribute('title',  place.name);
                     // entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
-                    if(getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude) > 2){
-                        const text = document.createElement('a-text');
-                        text.setAttribute('value', 'Reached Destination');
-                        text.setAttribute('color', 'black');
-                        text.setAttribute('gps-entity-place', `latitude: ${e.detail.position.latitude + 0.0001}; longitude: ${e.detail.position.longitude};`);
-                        text.setAttribute('scale', '15 15 15');
-                        document.querySelector("a-scene").appendChild(text);
+                    if(!getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude) > 2){
+                        const testEntity  = document.createElement("a-entity");
+                        testEntity.setAttribute('geometry', 'primitive: box');
+                        testEntity.setAttribute("scale", {
+                            x: 15, 
+                            y: 15,
+                            z: 15
+                        });
+                        testEntity.setAttribute('material', { color: 'blue' } );
+                        testEntity.setAttribute('gps-new-entity-place', {
+                            latitude: e.detail.position.latitude + 0.001,
+                            longitude: e.detail.position.longitude
+                        }); 
+                        document.querySelector("a-scene").appendChild(testEntity);
+
+                        console.log("Very Far")
+                        
                     } else {
+                        console.log("Here")
                         document.querySelector("a-scene").appendChild(entity);
                     }
-                    
+                   
                     
                     // console.log(getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude))
                 })
