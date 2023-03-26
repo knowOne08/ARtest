@@ -79,7 +79,6 @@ window.onload = () => {
                 places.forEach((place) => {
                     const latitude = place.location.lat;
                     const longitude = place.location.lng;
-
                     const entity = document.createElement("a-box");
                     entity.setAttribute("scale", {
                         x: 15, 
@@ -91,9 +90,11 @@ window.onload = () => {
                         latitude: latitude,
                         longitude: longitude
                     });
-                    entity.addEventListener('loaded', () => {
-                        window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                    });
+                    // entity.addEventListener('loaded', () => {
+                    //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                    // });
+
+                    document.querySelector("a-scene").appendChild(entity);
                 })
             })
 
