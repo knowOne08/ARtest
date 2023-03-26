@@ -84,18 +84,24 @@ window.onload = () => {
         return Math.round(d*1000); // Distance in m
       }
       
+      function deg2rad(deg) {
+        return deg * (Math.PI/180)
+      }
+      
     let testEntityAdded = false;
 
     const el = document.querySelector("[gps-new-camera]");
 
     el.addEventListener("gps-camera-update-position", e => {
-
+        
         loadPlaces(e.detail.position)// passing the position to find the current position
             .then((places) => {
                 places.forEach((place) => {
+                    
                     const latitude = place.location.lat;
                     const longitude = place.location.lng;
-                    const entity = document.createElement("a-box");
+                    const entity = document.createElement("a-entity");
+                    entity.setAttribute('geometry', 'primitive: box');
                     entity.setAttribute("scale", {
                         x: 15, 
                         y: 15,
@@ -106,14 +112,28 @@ window.onload = () => {
                         latitude: latitude,
                         longitude: longitude
                     });
-                    entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
-                    document.querySelector("a-scene").appendChild(entity);
+                    // entity.setAttribute('title',  place.name);
+                    // entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
+                    if(getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude) > 2){
+                        const text = document.createElement('a-text');
+                        text.setAttribute('value', 'Reached Destination');
+                        text.setAttribute('color', 'black');
+                        text.setAttribute('gps-entity-place', `latitude: ${e.detail.position.latitude + 0.0001}; longitude: ${e.detail.position.longitude};`);
+                        text.setAttribute('scale', '15 15 15');
+                        document.querySelector("a-scene").appendChild(text);
+                    } else {
+                        document.querySelector("a-scene").appendChild(entity);
+                    }
+                    
+                    
+                    // console.log(getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude))
                 })
+                
             })
 
             
            
-        
+           
         
         
         
