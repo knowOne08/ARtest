@@ -90,11 +90,12 @@ window.onload = () => {
       
     let testEntityAdded = false;
 
-    const el = document.querySelector("[gps-new-camera]");
+    // const el = document.querySelector("[gps-new-camera]");
+    
 
-    el.addEventListener("gps-camera-update-position", e => {
-        
-        loadPlaces(e.detail.position)// passing the position to find the current position
+    
+        return navigator.geolocation.watchPosition((position) => {
+        loadPlaces(position.coords)// passing the position to find the current position
             .then((places) => {
                 places.forEach((place) => {
                     
@@ -114,7 +115,7 @@ window.onload = () => {
                     });
                     // entity.setAttribute('title',  place.name);
                     // entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
-                    if(!getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude) > 2){
+                    if(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) > 2){
                         const testEntity  = document.createElement("a-entity");
                         testEntity.setAttribute('geometry', 'primitive: box');
                         testEntity.setAttribute("scale", {
@@ -124,21 +125,27 @@ window.onload = () => {
                         });
                         testEntity.setAttribute('material', { color: 'blue' } );
                         testEntity.setAttribute('gps-new-entity-place', {
-                            latitude: e.detail.position.latitude + 0.001,
-                            longitude: e.detail.position.longitude
+                            latitude: position.coords.latitude + 0.001,
+                            longitude: position.coords.longitude
                         }); 
                         document.querySelector("a-scene").appendChild(testEntity);
-
                         console.log("Very Far")
+                        testEntity.addEventListener('loaded', () => {
+                            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                        });
+                       
                         
                     } else {
                         console.log("Here")
+                        entity.addEventListener('loaded', () => {
+                            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                        });
                         document.querySelector("a-scene").appendChild(entity);
                     }
                    
                     
                     // console.log(getDistanceFromLatLonInKm(e.detail.position.latitude,e.detail.position.longitude,latitude,longitude))
-                })
+                });
                 
             })
 
