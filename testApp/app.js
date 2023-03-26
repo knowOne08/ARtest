@@ -124,7 +124,7 @@ window.onload = () => {
                     });
                     // entity.setAttribute('title',  place.name);
                     // entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
-                    if(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) < 30){
+                    if(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) < 25){
                         const testEntity  = document.createElement("a-entity");
                         testEntity.setAttribute('geometry', 'primitive: box');
                         testEntity.setAttribute("scale", {
