@@ -94,7 +94,7 @@ window.onload = () => {
     
 
     
-        return navigator.geolocation.watchPosition((position) => {
+        return navigator.geolocation.getCurrentPosition((position) => {
         loadPlaces(position.coords)// passing the position to find the current position
             .then((places) => {
                 places.forEach((place) => {
@@ -115,7 +115,7 @@ window.onload = () => {
                     });
                     // entity.setAttribute('title',  place.name);
                     // entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
-                    if(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) > 2){
+                    if(!getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) > 2){
                         const testEntity  = document.createElement("a-entity");
                         testEntity.setAttribute('geometry', 'primitive: box');
                         testEntity.setAttribute("scale", {

@@ -161,7 +161,7 @@ window.onload = () => {
                     // placeText.setAttribute('text',"value: Click Me; color: #FF0000; align: center; anchor: center; baseline: bottom; letter-spacing: 5; line-height: 1.5; opacity: 0.8;")
                     placeText.addEventListener('loaded', () => {
                         window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                    });
+                    }); 
 
                     scene.appendChild(placeText);
                 });
