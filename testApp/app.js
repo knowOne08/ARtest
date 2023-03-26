@@ -46,6 +46,14 @@ function loadPlaces(position) {
                 }
             }],
            [ {
+                name: "Home",
+                url:"./assets/arrow.gltf",
+                location: {
+                    lat: 23.056784314414482,  // add here latitude if using static data
+                    lng: 72.66345756966565, // add here longitude if using static data
+                }
+            }],
+           [ {
                 name: "Divit Hills",
                 url:"./assets/arrow.gltf",
                 location: {
@@ -63,7 +71,7 @@ function loadPlaces(position) {
             }],
         ];
         // return Promise.resolve(HOME_PlACES[placeToFind]);
-        return Promise.resolve(HOME_PlACES[0]);
+        return Promise.resolve(HOME_PlACES[1]);
     }
 }
 
@@ -81,6 +89,7 @@ window.onload = () => {
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         let d = R * c; 
         // return d; // Distance in km
+        console.log(Math.round(d*1000))
         return Math.round(d*1000); // Distance in m
       }
       
@@ -115,13 +124,13 @@ window.onload = () => {
                     });
                     // entity.setAttribute('title',  place.name);
                     // entity.setAttribute('title',  place.name + " " + getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) + " km");
-                    if(!getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) > 2){
+                    if(getDistanceFromLatLonInKm(position.coords.latitude,position.coords.longitude,latitude,longitude) < 30){
                         const testEntity  = document.createElement("a-entity");
                         testEntity.setAttribute('geometry', 'primitive: box');
                         testEntity.setAttribute("scale", {
                             x: 15, 
                             y: 15,
-                            z: 15
+                            z: 15   
                         });
                         testEntity.setAttribute('material', { color: 'blue' } );
                         testEntity.setAttribute('gps-new-entity-place', {
@@ -129,14 +138,14 @@ window.onload = () => {
                             longitude: position.coords.longitude
                         }); 
                         document.querySelector("a-scene").appendChild(testEntity);
-                        console.log("Very Far")
+                        console.log("Reached")
                         testEntity.addEventListener('loaded', () => {
                             window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
                         });
                        
                         
                     } else {
-                        console.log("Here")
+                        console.log("Far")
                         entity.addEventListener('loaded', () => {
                             window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
                         });
